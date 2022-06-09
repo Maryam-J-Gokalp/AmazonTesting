@@ -43,6 +43,15 @@ public class HomePage {
     @FindBy(id = "ap_email")
     public WebElement signInInputBoxForEmail;
 
+    @FindBy(id = "ap_password")
+    public WebElement signInInputBoxForPassword;
+
+    @FindBy(id = "signInSubmit")
+    public WebElement signInButtonInTheSignInScreen;
+
+    @FindBy(id = "nav-link-accountList-nav-line-1")
+    public WebElement checkNameAfterSignIn;
+
     @FindBy(id = "continue")
     public WebElement signInContinueButton;
 }
