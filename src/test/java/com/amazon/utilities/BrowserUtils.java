@@ -1,5 +1,6 @@
 package com.amazon.utilities;
 
+import com.amazon.pages.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 public class BrowserUtils {
 
+    static HomePage homePage = new HomePage();
     //sleep
     public static void sleep(int seconds){
 
@@ -39,5 +41,20 @@ public class BrowserUtils {
         }catch (Exception e){
 
         }
+    }
+
+
+    public static Integer searchResultNumber(){
+        //1-12 of 242 results for
+
+        String result = homePage.searchResultNumber.getText();
+        System.out.println("result = " + result);
+        String[] response = result.split(" ");
+        System.out.println("response[0] = " + response[0]);
+        String[] actualResult = response[0].split("-");
+        result = actualResult[1];
+
+        return Integer.parseInt(result);
+
     }
 }
