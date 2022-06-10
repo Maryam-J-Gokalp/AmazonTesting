@@ -57,4 +57,16 @@ public class BrowserUtils {
         return Integer.parseInt(result);
 
     }
+
+
+    public static void navigateTo(String URL){
+
+        try{
+            Driver.getDriver().navigate().to(URL);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("URL didn't load properly");
+        }
+    }
 }
