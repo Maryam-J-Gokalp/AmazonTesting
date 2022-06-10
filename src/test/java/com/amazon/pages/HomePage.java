@@ -54,4 +54,33 @@ public class HomePage {
 
     @FindBy(id = "continue")
     public WebElement signInContinueButton;
+
+    @FindBy(id = "glow-ingress-block")
+    public WebElement deliverToLocation;
+
+    @FindBy(id = "GLUXZipUpdateInput")
+    public WebElement deliverToZipCodeInputBox;
+
+    @FindBy(xpath = "//*[@id=\"GLUXZipUpdate\"]/span/input")
+    public WebElement zipCodeApplyButton;
+
+    @FindBy(xpath = "//button[@name='glowDoneButton']")
+    public WebElement deliverDoneButton;
+
+    @FindBy(id = "glow-ingress-line2")
+    public WebElement zipCodeAddressNameCheck;
+
+    @FindBy(xpath = "(//input[@id='GLUXConfirmClose'])[2]")
+    public WebElement zipCodeContinueButton;
+
+    @FindBy(id = "a-popover-header-1")
+    public WebElement zipPopUp;
+
+    @FindBy(id = "nav-item-signout")
+    public WebElement signOutWithHoverElement;
+
+    @FindBy(xpath = "//div[@class=' a-declarative']")
+    public WebElement dropdownOnLocation;
+
+
 }
