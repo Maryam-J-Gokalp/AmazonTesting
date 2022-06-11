@@ -1,8 +1,6 @@
 package com.amazon.pages;
 
 import com.amazon.utilities.Driver;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -82,5 +80,22 @@ public class HomePage {
     @FindBy(xpath = "//div[@class=' a-declarative']")
     public WebElement dropdownOnLocation;
 
+    @FindBy(xpath = "//title[@dir='ltr']")
+    public WebElement titleOfPage;
+
+    @FindBy(xpath = "(//div[@id=\"nav-main\"]//div)[1]")
+    public WebElement hamburgerAllMenu;
+
+    @FindBy(xpath = "//div[@id='hmenu-canvas-background']//div")
+    public WebElement hamburgerCloseSign;
+
+    @FindBy(id = "hmenu-content")
+    public WebElement hamburgerMenuContent;
+
+    @FindBy(xpath = "(//input[@class='a-button-input'])[1]")
+    public WebElement dontChangeButton;
+
+    @FindBy(xpath = "(//input[@class='a-button-input'])[2]")
+    public WebElement changeAddressButton;
 
 }

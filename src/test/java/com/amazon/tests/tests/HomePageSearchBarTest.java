@@ -1,13 +1,14 @@
 package com.amazon.tests.tests;
 
 import com.amazon.pages.HomePage;
+import com.amazon.pages.SignInPage;
+import com.amazon.tests.base.TestBase;
 import com.amazon.utilities.BrowserUtils;
 import com.amazon.utilities.ConfigurationReader;
 import com.amazon.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,16 +16,22 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class HomePageSearchBarTest {
+import java.util.ArrayList;
+import java.util.List;
+
+public class HomePageSearchBarTest extends TestBase {
     HomePage homePage;
+    SignInPage signInPage;
+    WebDriverWait wait;
     @BeforeMethod
     public void setUpMethod(){
         Driver.getDriver().get(ConfigurationReader.getProperty("env"));
         homePage = new HomePage();
+        signInPage = new SignInPage();
+        wait = new WebDriverWait(Driver.getDriver(),10);
     }
+
 
     @AfterMethod
     public void tearDown(){
@@ -46,6 +53,7 @@ public class HomePageSearchBarTest {
         //Your name is appeared on the homepage.
 
 
+        Driver.getDriver().manage().deleteAllCookies();
 
         Actions actions = new Actions(Driver.getDriver());
 
@@ -108,15 +116,15 @@ public class HomePageSearchBarTest {
     }
 
     @Test
-    public void hover_account_and_list_test(){
+    public void hover_account_and_verify_alert_message_test(){
 
         //hover account and list title and see the sign in button
         //click the sign in button
         //see the sign in screen properly
-        //enter wrong mail adress in the input box
+        //enter wrong mail address in the input box
         //click the continue button
         //see the alert message
-        //verfity that alert message says 'There was a problem'
+        //verify that alert message says 'There was a problem'
 
         Actions actions = new Actions(Driver.getDriver());
 
@@ -165,8 +173,8 @@ public class HomePageSearchBarTest {
 
         //after successful login, click the Deliver to 'Location' link
         //then see the "choose your location" screen
-        //select location with the dropdown as Japan
-        //click done
+        //select location with the dropdown as 'Japan'
+        //click done button
         //verify:
         //location should be changed as 'Japan'
 
@@ -188,6 +196,70 @@ public class HomePageSearchBarTest {
 
 
     }
+
+    @Test
+    public void legal_policies_test(){
+
+        //this test include and verify condition of use and Privacy notice is shown properly
+        //go to sign in page
+        //click the condition of use link
+        //verify:
+        //see the condition of use page and verify with title and header
+        //go back for sign in page
+        //click the Privacy Notice link
+        //verify:
+        //see the privacy notice page and verify with title and header
+        //go back to sign in page
+
+        Driver.getDriver().manage().deleteAllCookies();
+
+        Actions actions = new Actions(Driver.getDriver());
+
+        actions.moveToElement(homePage.hoverAccountAndList).perform();
+
+        homePage.signInButton.click();
+        BrowserUtils.sleep(1);
+
+        signInPage.conditionOfUseLinkAboveCreateButton.click();
+
+        String actualConditionOfUseTitle = Driver.getDriver().getTitle();
+        String expectedConditionOfUseTitle = "Conditions of Use - Amazon Customer Service";
+        Assert.assertTrue(actualConditionOfUseTitle.equals(expectedConditionOfUseTitle),"Condition of Use page title is not correct");
+        String actualConditionOfHeader = signInPage.conditionOfUseHeader.getText();
+        String expectedConditionOfHeader = "Conditions of Use";
+        Assert.assertTrue(actualConditionOfHeader.equals(expectedConditionOfHeader),"Condiion of Use page header is not found");
+        Driver.getDriver().navigate().back();
+        signInPage.privacyNoticeLinkAboveCreateButton.click();
+
+        String actualPrivacyNoticeTitle = Driver.getDriver().getTitle();
+        String expectedPrivacyNoticeTitle = "Amazon.com Privacy Notice - Amazon Customer Service";
+        Assert.assertTrue(actualPrivacyNoticeTitle.equals(expectedPrivacyNoticeTitle),"Privacy Notice page title is not correct");
+        Driver.getDriver().navigate().back();
+
+        signInPage.needHelpAboveCreateButton.click();
+
+
+
+
+    }
+
+    @Test
+    public void hamburger_menu_test(){
+
+        //click the don't change location button
+        //click the hamburger menu
+        //check each category one by one
+        //verify:
+        //make sure that each link is executeable
+
+        //login_function_test();
+        homePage.dontChangeButton.click();
+        boolean testResult = BrowserUtils.hamburgerMenuLinkTest(); //if test is successful, result must be return true
+        Assert.assertTrue(testResult,"Link test fail");
+
+
+    }
+
 
 
 }
