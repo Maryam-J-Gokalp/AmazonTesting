@@ -98,4 +98,7 @@ public class HomePage {
     @FindBy(xpath = "(//input[@class='a-button-input'])[2]")
     public WebElement changeAddressButton;
 
+    @FindBy(xpath = "//span[@class='action-inner']")
+    public WebElement bottomSignInButton;
+
 }

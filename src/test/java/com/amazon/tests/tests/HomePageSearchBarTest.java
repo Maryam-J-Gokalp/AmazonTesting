@@ -7,6 +7,7 @@ import com.amazon.utilities.BrowserUtils;
 import com.amazon.utilities.ConfigurationReader;
 import com.amazon.utilities.Driver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,12 +25,14 @@ public class HomePageSearchBarTest extends TestBase {
     HomePage homePage;
     SignInPage signInPage;
     WebDriverWait wait;
+    Actions actions;
     @BeforeMethod
     public void setUpMethod(){
         Driver.getDriver().get(ConfigurationReader.getProperty("env"));
         homePage = new HomePage();
         signInPage = new SignInPage();
         wait = new WebDriverWait(Driver.getDriver(),10);
+        actions = new Actions(Driver.getDriver());
     }
 
 
@@ -258,6 +261,20 @@ public class HomePageSearchBarTest extends TestBase {
         Assert.assertTrue(testResult,"Link test fail");
 
 
+    }
+
+    @Test
+    public void bottom_sign_in_button_test(){
+
+
+        //scroll down on the bottom sign in button
+        //verify:
+        // bottom sign in button is clickable
+
+        Driver.getDriver().manage().deleteAllCookies();
+        ((JavascriptExecutor)Driver.getDriver()).executeScript("window.scrollBy(0,4000)");
+        actions.moveToElement(homePage.bottomSignInButton).click().perform();
+        Assert.assertTrue(homePage.signInInputBoxForEmail.isDisplayed(),"Sign in page doesnt appeared properly");
     }
 
 
